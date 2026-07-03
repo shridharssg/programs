@@ -1,0 +1,426 @@
+⭐ ARRAY INTERVIEW PROGRAMS (BASIC → ADVANCED)
+
+
+
+
+✅ 1. Count Frequency of Elements
+
+Input:
+let arr = [1,2,2,3,1,1];
+
+Code:
+let freq = {};
+for (let i = 0; i < arr.length; i++) {
+  if (freq[arr[i]]) freq[arr[i]]++;
+  else freq[arr[i]] = 1;
+}
+console.log(freq);
+
+Output:
+{1:3,2:2,3:1}
+------------------------------------------------------------
+
+✅ 1. Reverse Array (Manual)
+
+Input:
+let arr = [1,2,3,4];
+
+Code:
+let rev = [];
+for (let i = arr.length - 1; i >= 0; i--) {
+  rev.push(arr[i]);
+}
+console.log(rev);
+
+Output:
+[4,3,2,1]
+
+------------------------------------------------------------
+
+
+------------------------------------------------------------
+
+✅ 3. Remove Duplicates (Manual)
+
+Input:
+let arr = [1,2,2,3,4,4];
+
+Code:
+let result = [];
+for (let i = 0; i < arr.length; i++) {
+  let found = false;
+  for (let j = 1; j < result.length; j++) {
+    if (arr[i] === result[j]) {
+      found = true;
+      break;
+    }
+  }
+  if (!found) result.push(arr[i]);
+}
+console.log(result);
+
+Output:
+[1,2,3,4]
+
+------------------------------------------------------------
+
+✅ 4. Move Zeros to End
+
+Input:
+let arr = [0,1,0,3,12];
+
+let count = 0
+let newArr=[]
+
+
+for (let i = 0; i < arr.length; i++) {
+	if (arr[i] == 0) {
+		count++
+	}else{
+		newArr.push(arr[i])
+	}
+}
+
+for (let i = 0; i < count; i++) {
+	newArr.push(0)
+}
+
+console.log(newArr);
+
+Output:
+[1,3,12,0,0]
+
+------------------------------------------------------------
+
+✅ 5. Find Sum of Array
+
+Input:
+let arr = [1,2,3,4];
+
+Code:
+let sum = 0;
+for (let i = 0; i < arr.length; i++) {
+  sum += arr[i];
+}
+console.log(sum);
+
+Output:
+10
+
+------------------------------------------------------------
+
+✅ 6. Flatten Array (Manual)
+
+
+	let input = [1, [2, 3], [4, [5, 6]]]
+	let result = [];
+
+	function flatten(arr) {
+		for (let item of arr) {
+		  if (Array.isArray(item)) {
+			flatten(item);  // recursive call
+		  } else {
+			result.push(item);
+		  }
+		}
+	 }
+	 flatten(input)
+	 
+	console.log(result)
+	
+o/p	[1,2,3,4,5,6]
+------------------------------------------------------------
+
+✅ 7. Rotate Array (Left by 1)
+
+Input:
+let arr = [1,2,3,4];
+
+Code:
+let first = arr[0];
+for (let i = 0; i < arr.length - 1; i++) {
+  arr[i] = arr[i+1];
+}
+arr[arr.length - 1] = first;
+console.log(arr);
+
+Output:
+[2,3,4,1]
+
+------------------------------------------------------------
+
+✅ 8. Two Sum Problem (Manual)
+
+Input:
+let arr = [2,7,11,15];
+let target = 9;
+
+Code:
+for (let i = 0; i < arr.length; i++) {
+  for (let j = i + 1; j < arr.length; j++) {
+    if (arr[i] + arr[j] === target) {
+      console.log(i, j);
+    }
+  }
+}
+
+Output:
+0 1
+
+------------------------------------------------------------
+
+✅ 9. Find Missing Number (1 to N)
+
+Input:
+let arr = [1,2,4,5];
+
+Code:
+let n = arr.length + 1;
+let total = (n * (n + 1)) / 2;
+
+let sum = 0;
+for (let i = 0; i < arr.length; i++) {
+  sum += arr[i];
+}
+
+console.log(total - sum);
+
+Output:
+3
+
+------------------------------------------------------------
+
+✅ 11. Find First Non-Repeating Element
+
+Input:
+let arr = [4,5,1,2,1,2];
+
+Code:
+for (let i = 0; i < arr.length; i++) {
+  let count = 0;
+  for (let j = 0; j < arr.length; j++) {
+    if (arr[i] === arr[j]) count++;
+  }
+  if (count === 1) {
+    console.log(arr[i]);
+    break;
+  }
+}
+
+Output:
+4
+
+------------------------------------------------------------
+
+✅ 12. Merge Two Sorted Arrays (Manual)
+
+Input:
+let a = [1,3,5];
+let b = [2,4,6];
+
+Code:
+let i=0,j=0,res=[];
+while(i<a.length && j<b.length){
+  if(a[i]<b[j]) res.push(a[i++]);
+  else res.push(b[j++]);
+}
+
+while(i<a.length) res.push(a[i++]);
+while(j<b.length) res.push(b[j++]);
+
+console.log(res);
+
+Output:
+[1,2,3,4,5,6]
+
+------------------------------------------------------------
+
+✅ 13. Chunk Array
+
+Input:
+let arr = [1,2,3,4,5];
+let size = 2;
+
+Code:
+let res = [];
+for (let i = 0; i < arr.length; i += size) {
+  let temp = [];
+  for (let j = i; j < i + size && j < arr.length; j++) {
+    temp.push(arr[j]);
+  }
+  res.push(temp);
+}
+console.log(res);
+
+Output:
+[[1,2],[3,4],[5]]
+
+
+======================================
+
+✅ 2. Second Largest Number
+
+Input:
+[10, 20, 30, 40]
+
+Code:
+const result = [...new Set([10, 20, 30, 40])]
+  .sort((a, b) => b - a)[1];
+
+console.log(result);
+
+Output:
+30
+
+------------------------------------------------------------
+
+✅ 5. Frequency Count
+
+Input:
+[1, 2, 2, 3, 3, 3]
+
+Code:
+let arr = [1,2,2,3,3,3];
+
+let result = arr.reduce((acc, val) => {
+  acc[val] = (acc[val] || 0) + 1;
+  return acc;
+}, {});
+
+console.log(result);
+
+Output:
+{1:1, 2:2, 3:3}
+
+------------------------------------------------------------
+
+✅ 9. Group by Property
+
+Input:
+let users = [
+  { name: "A", age: 20 },
+  { name: "B", age: 20 },
+  { name: "C", age: 25 }
+];
+
+Code:
+let result = {};
+
+for (let user of users) {
+  if (!result[user.age]) {
+    result[user.age] = [];
+  }
+  result[user.age].push({ name: user.name });
+}
+
+console.log(result);
+
+Output:
+{
+  20: [ { name: "A" }, { name: "B" } ],
+  25: [ { name: "C" } ]
+}
+
+------------------------------------------------------------
+
+✅ 10. Intersection of Two Arrays
+
+Input:
+[1, 2, 3] and [2, 3, 4]
+
+Code:
+let arr1 = [1,2,3];
+let arr2 = [2,3,4];
+
+let result = arr1.filter(val => arr2.includes(val));
+
+console.log(result);
+
+Output:
+[2, 3]
+
+------------------------------------------------------------
+
+✅ 11. Remove Falsy Values
+
+Input:
+[0, 1, false, 2, "", 3]
+
+Code:
+let arr = [0,1,false,2,"",3];
+
+let result = arr.filter(val => val);
+
+console.log(result);
+
+Output:
+[1, 2, 3]
+
+------------------------------------------------------------
+
+✅ 15. Array to Object
+
+Input:
+["a", "b", "c"]
+
+Code:
+let arr = ["a","b","c"];
+
+let result = {};
+
+for (let i = 0; i < arr.length; i++) {
+  result[i] = arr[i];
+}
+
+console.log(result);
+
+Output:
+{0: "a", 1: "b", 2: "c"}
+
+------------------------------------------------------------
+
+✅ 16. Longest String
+
+Input:
+["cat", "elephant", "dog"]
+
+Code:
+let arr = ["cat","elephant","dog"];
+
+let longest = arr[0];
+
+for (let i = 1; i < arr.length; i++) {
+  if (arr[i].length > longest.length) {
+    longest = arr[i];
+  }
+}
+
+console.log(longest);
+
+Output:
+elephant
+
+------------------------------------------------------------
+
+✅ 17. Palindrome Strings
+
+Input:
+["madam", "hello", "racecar"]
+
+Code:
+let arr = ["madam","hello","racecar"];
+let result = [];
+
+for (let str of arr) {
+  let rev = str.split('').reverse().join('');
+  if (str === rev) {
+    result.push(str);
+  }
+}
+
+console.log(result);
+
+Output:
+["madam", "racecar"]
+
+------------------------------------------------------------

@@ -1,0 +1,295 @@
+✅ 1. Reverse String (Manual)
+
+Input:
+"hello"
+
+Code:
+let str = "hello";
+let rev = "";
+
+for (let i = str.length - 1; i >= 0; i--) {
+  rev += str[i];
+}
+
+console.log(rev);
+
+Output:
+"olleh"
+
+------------------------------------------------------------
+
+✅ 2. Palindrome Check
+
+Input:
+"madam"
+
+Code:
+let str = "madam";
+let rev = "";
+
+for (let i = str.length - 1; i >= 0; i--) {
+  rev += str[i];
+}
+
+console.log(str === rev);
+
+Output:
+true
+
+------------------------------------------------------------
+
+------------------------------------------------------------
+
+✅ 4. Fibonacci Series
+
+Input:
+5
+
+Code:
+let input = 5;
+let a = 0, b = 1;
+
+for (let i = 0; i < input; i++) {
+  console.log(a);
+  let temp = a + b;
+  a = b;
+  b = temp;
+}
+
+Output:
+0 1 1 2 3
+
+------------------------------------------------------------
+
+✅ 5. Factorial
+
+Input:
+5
+
+means 1*2*3*4*5
+
+Code:
+	let num = 5;
+	let fact = 1;
+
+	for (let i = 1; i <= num; i++) {
+	  fact *= i;
+	}
+
+	console.log(fact);
+
+	Output:
+	120
+
+------------------------------------------------------------
+
+✅ 6. Remove Duplicates from String
+
+Input:
+"programming"
+
+Code:
+let str = "programming";
+let result = "";
+
+for (let char of str) {
+  if (!result.includes(char)) {
+    result += char;
+  }
+}
+
+console.log(result);
+
+Output:
+"progamin"
+
+------------------------------------------------------------
+
+✅ 7. Find Largest Word in Sentence
+
+Input:
+"I love javascript programming"
+
+Code:
+let str = "I love javascript programming";
+let words = str.split(" ");
+
+let longest = words[0];
+
+for (let word of words) {
+  if (word.length > longest.length) {
+    longest = word;
+  }
+}
+
+console.log(longest);
+
+Output:
+"programming"
+
+------------------------------------------------------------
+
+✅ 8. Count Vowels
+
+Input:
+"hello"
+
+Code:
+let str = "hello";
+let count = 0;
+
+for (let ch of str) {
+  if ("aeiou".includes(ch)) {
+    count++;
+  }
+}
+
+console.log(count);
+
+Output:
+2
+
+------------------------------------------------------------
+
+✅ 9. Swap Two Numbers
+
+Input:
+a = 10, b = 20
+
+Code:
+let a = 10, b = 20;
+
+let temp = a;
+a = b;
+b = temp;
+
+console.log(a, b);
+
+Output:
+20 10
+
+------------------------------------------------------------
+
+✅ 10. Check Prime Number
+
+Input:
+7
+
+Code:
+let num = 7;
+let isPrime = true;
+
+for (let i = 2; i < num; i++) {
+  if (num % i === 0) {
+    isPrime = false;
+    break;
+  }
+}
+
+console.log(isPrime);
+
+Output:
+true
+
+------------------------------------------------------------
+
+✅ 11. Find Duplicate Elements in Array
+
+Input:
+[1,2,3,2,4,1]
+
+Code:
+let arr = [1,2,3,2,4,1];
+let dup = [];
+
+for (let i = 0; i < arr.length; i++) {
+  for (let j = i + 1; j < arr.length; j++) {
+    if (arr[i] === arr[j] && !dup.includes(arr[i])) {
+      dup.push(arr[i]);
+    }
+  }
+}
+
+console.log(dup);
+
+Output:
+[2,1]
+
+------------------------------------------------------------
+
+✅ 12. Count Words in Sentence
+
+Input:
+"hello world js"
+
+Code:
+let str = "hello world js";
+let count = 1;
+
+for (let i = 0; i < str.length; i++) {
+  if (str[i] === " ") count++;
+}
+
+console.log(count);
+
+Output:
+3
+
+------------------------------------------------------------
+
+✅ 13. Find Second Smallest
+
+Input:
+[5,2,8,1]
+
+Code:
+let arr = [5,2,8,1];
+
+arr.sort((a,b)=>a-b);
+console.log(arr[1]);
+
+Output:
+2
+
+------------------------------------------------------------
+
+✅ 14. Check All Elements Unique
+
+Input:
+[1,2,3,4]
+
+Code:
+let arr = [1,2,3,4];
+let unique = true;
+
+for (let i = 0; i < arr.length; i++) {
+  for (let j = i + 1; j < arr.length; j++) {
+    if (arr[i] === arr[j]) {
+      unique = false;
+    }
+  }
+}
+
+console.log(unique);
+
+Output:
+true
+
+------------------------------------------------------------
+
+✅ 15. Capitalize First Letter
+
+Input:
+"hello"
+
+Code:
+let str = "hello";
+
+let result = str[0].toUpperCase() + str.slice(1);
+
+console.log(result);
+
+Output:
+"Hello"
+
+------------------------------------------------------------

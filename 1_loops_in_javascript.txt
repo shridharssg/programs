@@ -1,0 +1,146 @@
+JAVASCRIPT LOOPS WITH EXAMPLES
+
+1. for Loop
+Used when range/index is known
+
+	Example:
+
+	for (let i = 0; i < 5; i++) {
+	  console.log(i);
+	}
+	
+	Output: 0 1 2 3 4
+
+
+2. while Loop
+Runs while condition is true
+	Example:
+
+	let i = 0;
+	while (i < 5) {
+	  console.log(i);
+	  i++;
+	}
+	Output: 0 1 2 3 4
+
+3. do...while Loop
+
+	Runs at least once
+	Example:
+	let i = 0;
+	do {
+	  console.log(i);
+	  i++;
+	} while (i < 3);
+	Output: 0 1 2
+
+4. for...of Loop
+	Iterates array values
+
+	Example:
+
+	const arr = [10,20,30];
+	for (let val of arr) {
+	  console.log(val);
+	}
+	Output: 10 20 30
+
+5. for...in Loop
+	Iterates object keys
+
+	Example:
+	const obj = {a:1,b:2};
+	for (let key in obj) {
+	  console.log(key, obj[key]);
+	}
+
+	Output:
+	a 1
+	b 2
+
+6. Nested Loop
+	Loop inside loop
+
+	Example:
+	for (let i=1;i<=3;i++){
+	  for (let j=1;j<=3;j++){
+		console.log(i,j);
+	  }
+	}
+
+7. Loop with break
+
+	Stops loop early
+	Example:
+	for (let i=0;i<5;i++){
+	  if(i===3) break;
+	  console.log(i);
+	}
+	Output: 0 1 2
+
+8. Loop with continue
+
+	Skips iteration
+
+	Example:
+	for (let i=0;i<5;i++){
+	  if(i===2) continue;
+	  console.log(i);
+	}
+	
+	Output: 0 1 3 4
+
+9. Reverse Loop
+Example:
+for (let i=5;i>=1;i--){
+  console.log(i);
+}
+Output: 5 4 3 2 1
+
+10. Infinite Loop
+Example:
+for(;;){
+  console.log("Infinite");
+}
+====================================================================
+INTERVIEW EXAMPLES
+
+1. Sum of Array
+	const arr = [1,2,3,4];
+	let sum=0;
+
+	for(let i=0;i<arr.length;i++)
+	{ 
+		sum+=arr[i];
+	}
+
+	console.log(sum);
+	Output: 10
+
+2. Find Max
+
+	const arr2=[10,50,20];
+	let max=arr2[0];
+	
+	for(let i=1;i<arr2.length;i++){
+		if(arr2[i]>max) max=arr2[i];
+	}
+	
+	console.log(max);
+	Output: 50
+
+3. Reverse Array
+	const arr3=[1,2,3];
+	for(let i=arr3.length-1;i>=0;i--){
+	 console.log(arr3[i]);
+	}
+
+4. Count Even
+	const arr4=[1,2,3,4,5];
+	let count=0;
+
+	for(let num of arr4){
+	 if(num%2===0) count++;
+	}
+	console.log(count);
+	Output: 2

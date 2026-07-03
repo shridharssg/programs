@@ -1,0 +1,153 @@
+### How to make an object immutable? (seal and freeze methods)?
+In JavaScript, you can make an object immutable using the Object.seal() and Object.freeze() methods.
+
+Object.freeze(): 
+
+	(Completely Immutable) this method freezes an object, making it both sealed and marking all its properties as read-only. After freezing an object, its properties cannot be modified, added, or removed.
+
+	```
+		 const obj = { name: 'Alice', age: 25 };
+		 Object.freeze(obj);
+		 
+		 obj.name = 'Bob'; // Not allowed
+		 obj.address = '123 Street'; // Not allowed
+		 delete obj.age; // Not allowed
+	```
+		 
+Object.seal(): 
+
+		(Partialy Immutable) this method seals an object, preventing new properties from being added and marking all existing properties as non-configurable. However, you can still modify the values of existing properties that are writable.
+
+	```
+		 const obj = { name: 'Alice', age: 25 };
+		 Object.seal(obj);
+		 
+		 obj.name = 'Bob'; // Allowed
+		 obj.address = '123 Street'; // Not allowed (no new properties can be added)
+		 
+		 delete obj.age; // Not allowed (existing properties cannot be deleted)
+```
+
+
+
+OBJECT METHODS IN JAVASCRIPT
+
+1. Object.keys()
+	Returns all keys
+
+	Example:
+		const user = { name: "Shridhar", age: 30 };
+		console.log(Object.keys(user));
+		
+		Output: ["name", "age"]		-> o/p in array. 
+
+
+-----------------------------
+
+2. Object.values()
+	Returns all values
+
+	Example:
+		const user = { name: "Shridhar", age: 30 };
+		console.log(Object.values(user));
+		Output: ["Shridhar", 30]
+
+-----------------------------
+
+3. Object.entries()
+	Returns key-value pairs	(object to array)
+		
+		Example:
+			const user = { name: "Shridhar", age: 30 };
+			console.log(Object.entries(user));
+			
+			Output: [["name", "Shridhar"], ["age", 30]]
+			
+			
+	Object.fromEntries()
+		Array to Object
+		
+		Example:
+			const arr = [["name", "Shridhar"], ["age", 30]];
+			const obj = Object.fromEntries(arr);
+			console.log(obj);
+
+		o/p : { name: "Shridhar", age: 30 }	
+
+-----------------------------
+
+4. Object.assign()
+	Merge objects
+
+	Example:
+		const obj1 = { a: 1 };
+		const obj2 = { b: 2 };
+		const result = Object.assign({}, obj1, obj2);
+		console.log(result);
+
+-----------------------------
+
+5. Spread Operator
+	Example:
+	const result = { ...obj1, ...obj2 };
+
+-----------------------------
+
+6. Object.freeze()
+	Makes immutable
+	Example:
+
+	const obj = { name: "Shridhar" };
+	Object.freeze(obj);
+	obj.name = "Changed";
+	console.log(obj.name);	//Shridhar
+
+-----------------------------
+
+7. Object.seal()
+	Prevents adding new properties
+
+	Example:
+		const obj = { a: 1 };
+		Object.seal(obj);
+		obj.a = 10;			//allowed
+		obj.b = 20;			// not add
+		
+		console.log(obj);
+-----------------------------
+
+8. hasOwnProperty()
+	Check property exists
+
+	Example:
+		const user = { name: "Shridhar" };
+		console.log(user.hasOwnProperty("name"));
+	
+-----------------------------
+
+
+INTERVIEW PROGRAMS
+
+1. Count properties
+	const obj = { a:1, b:2, c:3 };
+	console.log(Object.keys(obj).length);			//.keys getting in array and length method apply on it
+
+2. Convert object to array
+	console.log(Object.entries(obj));
+
+3. Sum values
+	const sum = Object.values(obj).reduce((acc,val)=>acc+val,0);  // REDUCE apply on array
+
+4. Find key by value
+	Object.keys(obj).find(k => obj[k] === 2);
+
+
+6. Remove property
+delete obj.a;
+
+7. Deep vs shallow copy
+	const shallow = { ...obj };
+	const deep = JSON.parse(JSON.stringify(obj));
+
+8. Check empty
+	Object.keys(obj).length === 0;

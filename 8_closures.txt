@@ -1,0 +1,310 @@
+
+============================
+TOPIC: CLOSURES (INTERVIEW MASTER SET)
+============================
+
+---------------------------------
+1. BASIC CLOSURE
+---------------------------------
+function outer() {
+  let a = 10;
+  function inner() {
+    console.log(a);
+  }
+  return inner;
+}
+
+const fn = outer();
+fn();
+
+OUTPUT:
+10
+
+---------------------------------
+2. CLOSURE WITH PARAMETER
+---------------------------------
+function outer(x) {
+  return function(y) {
+    return x + y;
+  }
+}
+
+const add5 = outer(5);
+console.log(add5(3));
+
+OUTPUT:
+8
+
+---------------------------------
+3. PRIVATE VARIABLE USING CLOSURE
+---------------------------------
+function counter() {
+  let count = 0;
+  return function() {
+    count++;
+    return count;
+  }
+}
+
+const c = counter();
+console.log(c());
+console.log(c());
+
+OUTPUT:
+1
+2
+
+---------------------------------
+4. MULTIPLE INSTANCES
+---------------------------------
+const c1 = counter();
+const c2 = counter();
+console.log(c1(), c1(), c2());
+
+OUTPUT:
+1 2 1
+
+---------------------------------
+5. VAR LOOP (CLOSURE ISSUE)
+---------------------------------
+for (var i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i);
+  }, 0);
+}
+
+OUTPUT:
+3 3 3
+
+---------------------------------
+6. LET LOOP (FIX)
+---------------------------------
+for (let i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i);
+  }, 0);
+}
+
+OUTPUT:
+0 1 2
+
+---------------------------------
+7. FIX USING IIFE
+---------------------------------
+for (var i = 0; i < 3; i++) {
+  (function(j) {
+    setTimeout(function() {
+      console.log(j);
+    }, 0);
+  })(i);
+}
+
+OUTPUT:
+0 1 2
+
+---------------------------------
+8. CLOSURE INSIDE FUNCTION
+---------------------------------
+function test() {
+  let x = 5;
+  return function() {
+    return x * x;
+  }
+}
+
+console.log(test()());
+
+OUTPUT:
+25
+
+---------------------------------
+9. DATA HIDING
+---------------------------------
+function bankAccount() {
+  let balance = 100;
+  return {
+    deposit: function(amount) {
+      balance += amount;
+      return balance;
+    },
+    getBalance: function() {
+      return balance;
+    }
+  }
+}
+
+const acc = bankAccount();
+console.log(acc.deposit(50));
+console.log(acc.getBalance());
+
+OUTPUT:
+150
+150
+
+---------------------------------
+10. CLOSURE WITH TIMEOUT
+---------------------------------
+function delayedMessage(msg) {
+  setTimeout(function() {
+    console.log(msg);
+  }, 100);
+}
+
+delayedMessage("Hello");
+
+OUTPUT:
+Hello (after delay)
+
+---------------------------------
+11. FUNCTION CURRYING (CLOSURE)
+---------------------------------
+function multiply(a) {
+  return function(b) {
+    return function(c) {
+      return a * b * c;
+    }
+  }
+}
+
+console.log(multiply(2)(3)(4));
+
+OUTPUT:
+24
+
+---------------------------------
+12. MEMORY RETENTION
+---------------------------------
+function heavy() {
+  let data = new Array(1000).fill("JS");
+  return function() {
+    console.log(data.length);
+  }
+}
+
+const h = heavy();
+h();
+
+OUTPUT:
+1000
+
+---------------------------------
+13. CLOSURE IN EVENT HANDLER (SIMULATION)
+---------------------------------
+function attach(i) {
+  return function() {
+    console.log("Button", i);
+  }
+}
+
+const fn1 = attach(1);
+fn1();
+
+OUTPUT:
+Button 1
+
+---------------------------------
+14. MODIFYING OUTER VARIABLE
+---------------------------------
+function outer() {
+  let x = 10;
+  return {
+    inc: function() { x++; },
+    get: function() { return x; }
+  }
+}
+
+const obj = outer();
+obj.inc();
+console.log(obj.get());
+
+OUTPUT:
+11
+
+---------------------------------
+15. SHARED CLOSURE
+---------------------------------
+function outer() {
+  let count = 0;
+  return {
+    a: function() { count++; return count; },
+    b: function() { count++; return count; }
+  }
+}
+
+const x = outer();
+console.log(x.a(), x.b(), x.a());
+
+OUTPUT:
+1 2 3
+
+---------------------------------
+16. FUNCTION FACTORY
+---------------------------------
+function createLogger(prefix) {
+  return function(msg) {
+    console.log(prefix + ": " + msg);
+  }
+}
+
+const log = createLogger("INFO");
+log("Server started");
+
+OUTPUT:
+INFO: Server started
+
+---------------------------------
+17. WITHOUT CLOSURE (COMPARE)
+---------------------------------
+let count = 0;
+function inc() {
+  count++;
+}
+inc();
+console.log(count);
+
+OUTPUT:
+1
+
+---------------------------------
+18. TRICKY OUTPUT
+---------------------------------
+function outer() {
+  var a = 1;
+  return function inner() {
+    console.log(a);
+    var a = 2;
+  }
+}
+
+outer()();
+
+OUTPUT:
+undefined
+
+EXPLANATION:
+inner() has its own 'a' hoisted -> undefined.
+
+---------------------------------
+19. ANOTHER TRICKY OUTPUT
+---------------------------------
+function outer() {
+  let a = 1;
+  return function inner() {
+    console.log(a);
+  }
+}
+
+let fn = outer();
+a = 100;
+fn();
+
+OUTPUT:
+1
+
+---------------------------------
+20. INTERVIEW GOLD LINE
+---------------------------------
+Closure = function + lexical environment
+
+It remembers variables even after parent function execution completes.
+

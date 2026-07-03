@@ -1,0 +1,230 @@
+
+============================
+TOPIC: VARIABLES & HOISTING
+============================
+
+---------------------------------
+1. VAR HOISTING (DECLARATION)
+---------------------------------
+console.log(a);
+var a = 10;
+
+OUTPUT:
+undefined
+
+EXPLANATION:
+var is hoisted and initialized with undefined.
+
+---------------------------------
+2. LET HOISTING
+---------------------------------
+console.log(b);
+let b = 20;
+
+OUTPUT:
+ReferenceError
+
+EXPLANATION:
+let is hoisted but in TDZ (Temporal Dead Zone).
+
+---------------------------------
+3. CONST HOISTING
+---------------------------------
+console.log(c);
+const c = 30;
+
+OUTPUT:
+ReferenceError
+
+---------------------------------
+4. VAR REDECLARATION
+---------------------------------
+var x = 5;
+var x = 10;
+console.log(x);
+
+OUTPUT:
+10
+
+---------------------------------
+5. LET REDECLARATION
+---------------------------------
+let y = 5;
+let y = 10;
+
+OUTPUT:
+SyntaxError
+
+---------------------------------
+6. VAR VS LET IN BLOCK
+---------------------------------
+if (true) {
+  var p = 1;
+  let q = 2;
+}
+console.log(p);
+console.log(q);
+
+OUTPUT:
+1
+ReferenceError
+
+---------------------------------
+7. FUNCTION HOISTING
+---------------------------------
+sayHi();
+function sayHi() {
+  console.log("Hi");
+}
+
+OUTPUT:
+Hi
+
+---------------------------------
+8. FUNCTION EXPRESSION
+---------------------------------
+sayHello();
+var sayHello = function() {
+  console.log("Hello");
+}
+
+OUTPUT:
+TypeError (undefined is not a function)
+
+---------------------------------
+9. HOISTING PRIORITY	**************************************
+---------------------------------
+var a = 1;
+function a() {}
+console.log(a);
+
+OUTPUT:
+1
+
+function hoisted firt and then variable. so here type of a is function and later its override with number when assignment =1 is checked. 
+
+
+but same with let keyword, get error -> a has already been declared
+
+---------------------------------
+10. VARIABLE ASSIGNMENT BEFORE DECLARATION
+---------------------------------
+a = 5;
+console.log(a);
+var a;
+
+OUTPUT:
+5
+
+---------------------------------
+11. WITHOUT var (GLOBAL LEAK)
+---------------------------------
+function test() {
+  x = 10;
+}
+test();
+console.log(x);
+
+OUTPUT:
+10
+
+
+---------------------------------
+12. LET IN LOOP (CLOSURE SAFE)
+---------------------------------
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+
+OUTPUT:
+0 1 2
+
+
+
+
+---------------------------------
+13. VAR IN LOOP (CLOSURE ISSUE)
+---------------------------------
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+
+OUTPUT:
+3 3 3
+
+
+	“Why output is 3 3 3?”
+	Say:
+	
+	
+	setTimeout is async
+
+	setTimeout(..., 0) does NOT run immediately
+	It goes to callback queue
+	Executes only after the loop is finished
+
+	Closure captures reference (NOT value)
+
+	Because var is function-scoped, there is only one shared variable i.
+	The setTimeout callbacks execute after the loop finishes, when i becomes 3.
+	Closures capture the reference of i, not its value, so all callbacks print 3.
+
+---------------------------------
+14. FIX VAR LOOP WITHOUT BUILT-IN (IIFE)
+---------------------------------
+for (var i = 0; i < 3; i++) {
+  (function(j) {
+    setTimeout(() => console.log(j), 0);
+  })(i);
+}
+
+OUTPUT:
+0 1 2
+
+	here The IIFE creates a new scope in each iteration. j has new value each time
+
+---------------------------------
+15. TDZ EXAMPLE
+---------------------------------
+{
+  console.log(a);
+  let a = 10;
+}
+
+OUTPUT:
+ReferenceError
+
+---------------------------------
+18. FUNCTION INSIDE BLOCK (ES6 BEHAVIOR)
+---------------------------------
+if (true) {
+  function test() {}
+}
+console.log(typeof test);
+
+OUTPUT:
+function (in non-strict mode)
+
+---------------------------------
+19. MULTIPLE HOISTING
+---------------------------------
+var a = 1;
+function a() {}
+var a;
+console.log(a);
+
+OUTPUT:
+1
+
+---------------------------------
+20. COMPLEX OUTPUT QUESTION
+---------------------------------
+console.log(a);
+var a = 10;
+function a() {}
+console.log(a);
+
+OUTPUT:
+function a() {}
+10
+
