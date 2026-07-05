@@ -1,0 +1,462 @@
+
+============================================================
+✅ ADVANCED OBJECT INTERVIEW PROGRAMS (NODE.JS / JAVASCRIPT)
+============================================================
+
+------------------------------------------------------------
+✅ 1. GROUP BY SINGLE PROPERTY
+------------------------------------------------------------
+
+INPUT:
+
+const users = [
+  { name: "John", dept: "IT" },
+  { name: "Sam", dept: "HR" },
+  { name: "Mike", dept: "IT" }
+];
+
+OUTPUT:
+
+{
+  IT: [
+    { name: "John", dept: "IT" },
+    { name: "Mike", dept: "IT" }
+  ],
+  HR: [
+    { name: "Sam", dept: "HR" }
+  ]
+}
+
+PROGRAM:
+
+const result = users.reduce((acc, user) => {
+  if (!acc[user.dept]) {
+    acc[user.dept] = [];
+  }
+
+  acc[user.dept].push(user);
+  return acc;
+
+}, {});
+
+console.log(result);
+
+
+============================================================
+
+------------------------------------------------------------
+✅ 2. GROUP BY MULTIPLE PROPERTIES
+------------------------------------------------------------
+
+INPUT:
+
+const employees = [
+  { name: "A", city: "Pune", dept: "IT" },
+  { name: "B", city: "Pune", dept: "HR" },
+  { name: "C", city: "Mumbai", dept: "IT" }
+];
+
+OUTPUT:
+
+{
+  Pune: {
+    IT: [{ name: "A", city: "Pune", dept: "IT" }],
+    HR: [{ name: "B", city: "Pune", dept: "HR" }]
+  },
+  Mumbai: {
+    IT: [{ name: "C", city: "Mumbai", dept: "IT" }]
+  }
+}
+
+PROGRAM:
+
+const result = employees.reduce((acc, emp) => {
+
+  if (!acc[emp.city]) {
+    acc[emp.city] = {};
+  }
+
+  if (!acc[emp.city][emp.dept]) {
+    acc[emp.city][emp.dept] = [];
+  }
+
+  acc[emp.city][emp.dept].push(emp);
+
+  return acc;
+
+}, {});
+
+console.log(result);
+
+
+============================================================
+
+------------------------------------------------------------
+✅ 3. COUNT OBJECTS BY PROPERTY
+------------------------------------------------------------
+
+INPUT:
+
+const users = [
+  { status: "active" },
+  { status: "active" },
+  { status: "inactive" }
+];
+
+OUTPUT:
+
+{
+  active: 2,
+  inactive: 1
+}
+
+PROGRAM:
+
+const result = users.reduce((acc, user) => {
+
+  acc[user.status] =
+    (acc[user.status] || 0) + 1;
+
+  return acc;
+
+}, {});
+
+console.log(result);
+
+
+============================================================
+
+------------------------------------------------------------
+✅ 4. SUM SALARY DEPARTMENT-WISE
+------------------------------------------------------------
+
+INPUT:
+
+const employees = [
+  { dept: "IT", salary: 1000 },
+  { dept: "IT", salary: 2000 },
+  { dept: "HR", salary: 3000 }
+];
+
+OUTPUT:
+
+{
+  IT: 3000,
+  HR: 3000
+}
+
+PROGRAM:
+
+const result = employees.reduce((acc, emp) => {
+
+  acc[emp.dept] =
+    (acc[emp.dept] || 0) + emp.salary;
+
+  return acc;
+
+}, {});
+
+console.log(result);
+
+
+============================================================
+
+------------------------------------------------------------
+✅ 5. CONVERT ARRAY TO OBJECT
+------------------------------------------------------------
+
+INPUT:
+
+const users = [
+  { id: 1, name: "John" },
+  { id: 2, name: "Sam" }
+];
+
+OUTPUT:
+
+{
+  1: { id: 1, name: "John" },
+  2: { id: 2, name: "Sam" }
+}
+
+PROGRAM:
+
+const result = users.reduce((acc, user) => {
+
+  acc[user.id] = user;
+
+  return acc;
+
+}, {});
+
+console.log(result);
+
+
+============================================================
+
+------------------------------------------------------------
+✅ 6. REMOVE DUPLICATE OBJECTS
+------------------------------------------------------------
+
+INPUT:
+
+const users = [
+  { id: 1, name: "John" },
+  { id: 2, name: "Sam" },
+  { id: 1, name: "John" }
+];
+
+OUTPUT:
+
+[
+  { id: 1, name: "John" },
+  { id: 2, name: "Sam" }
+]
+
+PROGRAM:
+
+const result = [
+  ...new Map(
+    users.map(user => [user.id, user])
+  ).values()
+];
+
+console.log(result);
+
+
+============================================================
+
+------------------------------------------------------------
+✅ 7. FIND MAX SALARY OBJECT
+------------------------------------------------------------
+
+INPUT:
+
+const employees = [
+  { name: "A", salary: 1000 },
+  { name: "B", salary: 5000 },
+  { name: "C", salary: 3000 }
+];
+
+OUTPUT:
+
+{
+  name: "B",
+  salary: 5000
+}
+
+PROGRAM:
+
+const result = employees.reduce(
+  (max, emp) =>
+    emp.salary > max.salary ? emp : max
+);
+
+console.log(result);
+
+
+============================================================
+
+------------------------------------------------------------
+✅ 8. GET NESTED PROPERTY
+------------------------------------------------------------
+
+INPUT:
+
+const obj = {
+  user: {
+    address: {
+      city: "Pune"
+    }
+  }
+};
+
+getValue(obj, "user.address.city");
+
+OUTPUT:
+
+Pune
+
+PROGRAM:
+
+function getValue(obj, path) {
+
+  return path
+    .split(".")
+    .reduce(
+      (current, key) => current?.[key],
+      obj
+    );
+}
+
+console.log(
+  getValue(obj, "user.address.city")
+);
+
+
+============================================================
+
+------------------------------------------------------------
+✅ 9. SET NESTED PROPERTY
+------------------------------------------------------------
+
+INPUT:
+
+const obj = {};
+
+setValue(
+  obj,
+  "user.address.city",
+  "Mumbai"
+);
+
+OUTPUT:
+
+{
+  user: {
+    address: {
+      city: "Mumbai"
+    }
+  }
+}
+
+PROGRAM:
+
+function setValue(obj, path, value) {
+
+  const keys = path.split(".");
+  let current = obj;
+
+  for (let i = 0; i < keys.length - 1; i++) {
+
+    if (!current[keys[i]]) {
+      current[keys[i]] = {};
+    }
+
+    current = current[keys[i]];
+  }
+
+  current[keys[keys.length - 1]] = value;
+}
+
+const obj = {};
+
+setValue(
+  obj,
+  "user.address.city",
+  "Mumbai"
+);
+
+console.log(obj);
+
+
+============================================================
+
+------------------------------------------------------------
+✅ 10. FLATTEN NESTED OBJECT
+------------------------------------------------------------
+
+INPUT:
+
+const obj = {
+  user: {
+    name: "John",
+    address: {
+      city: "Pune"
+    }
+  }
+};
+
+OUTPUT:
+
+{
+  "user.name": "John",
+  "user.address.city": "Pune"
+}
+
+PROGRAM:
+
+function flatten(
+  obj,
+  parent = "",
+  result = {}
+) {
+
+  for (let key in obj) {
+
+    const newKey = parent
+      ? `${parent}.${key}`
+      : key;
+
+    if (
+      typeof obj[key] === "object" &&
+      obj[key] !== null
+    ) {
+
+      flatten(
+        obj[key],
+        newKey,
+        result
+      );
+
+    } else {
+
+      result[newKey] = obj[key];
+    }
+  }
+
+  return result;
+}
+
+console.log(flatten(obj));
+
+
+============================================================
+✅ TOP 5 MOST ASKED OBJECT INTERVIEW PROGRAMS
+============================================================
+
+✅ Group By Single Property
+
+✅ Group By Multiple Properties
+
+✅ Count / Sum By Group
+
+✅ Get / Set Nested Property
+
+✅ Flatten Nested Object
+
+============================================================
+✅ SENIOR NODE.JS (8+ YEARS) FOCUS AREAS
+============================================================
+
+✅ Array Transformations
+
+✅ Object Transformations
+
+✅ Closures
+
+✅ Hoisting
+
+✅ Scope
+
+✅ this Keyword
+
+✅ Event Loop
+
+✅ Promises
+
+✅ Async/Await
+
+✅ Call / Apply / Bind
+
+✅ Prototypes
+
+✅ Polyfills
+
+✅ Debounce
+
+✅ Throttle
+
+============================================================
+END OF FILE
+============================================================
